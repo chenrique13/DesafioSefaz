@@ -11,7 +11,7 @@ import java.util.Optional;
 public class UsuarioService {
 
 	private UsuarioRepository repositorio;
-	
+
 	public Usuario buscar(Integer id) {
 		Optional<Usuario> obj = repositorio.findById(id);
 		return obj.orElse(null);
