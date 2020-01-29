@@ -14,13 +14,18 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository repositorio;
 
-	public Usuario buscar(Integer id) {
+	public Usuario find(Integer id) {
 		Optional<Usuario> obj = repositorio.findById(id);
 		return obj.orElse(null);
 	}
 	
 	public Usuario insert(Usuario obj) {
 		obj.setId(null);
+		return repositorio.save(obj);
+	}
+	
+	public Usuario update(Usuario obj) {
+		find(obj.getId());
 		return repositorio.save(obj);
 	}
 }
