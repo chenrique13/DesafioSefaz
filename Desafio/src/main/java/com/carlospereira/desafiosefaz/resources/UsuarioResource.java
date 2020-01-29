@@ -1,27 +1,28 @@
 package com.carlospereira.desafiosefaz.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.carlospereira.desafiosefaz.domain.Usuario;
+import com.carlospereira.desafiosefaz.services.UsuarioService;
 
 @RestController
 @RequestMapping(value = "/usuarios")
 public class UsuarioResource {
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public List<Usuario> listar() {
+	@Autowired
+	private UsuarioService service;
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> find(@PathVariable Integer id){
+		Usuario obj = service.buscar(id);
 		
-		Usuario u1 = new Usuario(1, "Carlos", "c.henrique1309@gmail.com", "1234");
+		return ResponseEntity.ok().body(obj);
 		
-		List <Usuario> lista = new ArrayList<>();
-		lista.add(u1);
-		
-		return lista;
 	}
 	
 }
