@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 //Mapeamento
 @Entity
 public class Telefone implements Serializable {
@@ -22,12 +24,14 @@ public class Telefone implements Serializable {
 	private String numero;
 	private String tipo;
 
-	// associacao
-	@ManyToOne
+	
+	
+	@JsonIgnore
+	@ManyToOne  					// Associacao	
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 
-	// construtores
+	// Construtores
 	public Telefone() {
 		super();
 	}
@@ -41,7 +45,7 @@ public class Telefone implements Serializable {
 		this.usuario = usuario;
 	}
 
-	// gets e sets
+	// Gets e sets
 	public Integer getId() {
 		return id;
 	}
@@ -82,7 +86,7 @@ public class Telefone implements Serializable {
 		this.usuario = usuario;
 	}
 	
-	// hascode e equals
+	// Hascode e equals
 	@Override
 	public int hashCode() {
 		final int prime = 31;

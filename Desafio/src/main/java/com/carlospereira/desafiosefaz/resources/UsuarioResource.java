@@ -22,7 +22,6 @@ public class UsuarioResource {
 		Usuario obj = service.buscar(id);
 
 		return ResponseEntity.ok().body(obj);
-
 	}
 
 }

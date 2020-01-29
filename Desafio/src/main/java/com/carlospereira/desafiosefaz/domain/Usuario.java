@@ -24,11 +24,10 @@ public class Usuario implements Serializable {
 	private String email;
 	private String senha;
 
-	// associacao
-	@OneToMany(mappedBy = "usuario")
+	@OneToMany(mappedBy = "usuario")			// Associacao
 	private List<Telefone> telefones = new ArrayList<>();
 
-	// construtores
+	// Construtores
 	public Usuario() {
 
 	}
@@ -41,7 +40,7 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
-	// gets e sets
+	// Gets e sets
 	public Integer getId() {
 		return id;
 	}
@@ -82,7 +81,7 @@ public class Usuario implements Serializable {
 		this.telefones = telefones;
 	}
 
-	// hashcode e equals
+	// Hashcode e equals
 	@Override
 	public int hashCode() {
 		final int prime = 31;
