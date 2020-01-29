@@ -3,24 +3,32 @@ package com.carlospereira.desafiosefaz.domain;
 import java.io.Serializable;
 //import java.util.ArrayList;
 //import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Usuario implements Serializable{
+public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
+	// Atributos
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private String email;
 	private String senha;
-	//private List<Telefone> telefones = new ArrayList <>();
-	
+
+	// associacao
+	@OneToMany(mappedBy = "usuario")
+	private List<Telefone> telefones = new ArrayList<>();
+
+	// construtores
 	public Usuario() {
 
 	}
@@ -33,6 +41,7 @@ public class Usuario implements Serializable{
 		this.senha = senha;
 	}
 
+	// gets e sets
 	public Integer getId() {
 		return id;
 	}
@@ -65,7 +74,6 @@ public class Usuario implements Serializable{
 		this.senha = senha;
 	}
 
-/*	
 	public List<Telefone> getTelefones() {
 		return telefones;
 	}
@@ -73,12 +81,8 @@ public class Usuario implements Serializable{
 	public void setTelefones(List<Telefone> telefones) {
 		this.telefones = telefones;
 	}
-*/
-	@Override
-	public String toString() {
-		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + "]";
-	}
 
+	// hashcode e equals
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -104,5 +108,4 @@ public class Usuario implements Serializable{
 		return true;
 	}
 
-	
 }
