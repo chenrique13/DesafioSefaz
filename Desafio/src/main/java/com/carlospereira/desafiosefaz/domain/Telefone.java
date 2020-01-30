@@ -24,10 +24,8 @@ public class Telefone implements Serializable {
 	private String numero;
 	private String tipo;
 
-	
-	
 	@JsonIgnore
-	@ManyToOne  					// Associacao	
+	@ManyToOne // Associacao
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 
@@ -85,7 +83,7 @@ public class Telefone implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
+
 	// Hascode e equals
 	@Override
 	public int hashCode() {
