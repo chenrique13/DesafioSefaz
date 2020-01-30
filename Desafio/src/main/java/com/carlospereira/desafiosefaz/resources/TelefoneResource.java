@@ -24,19 +24,18 @@ public class TelefoneResource {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Telefone> find(@PathVariable Integer id) {
 		Telefone obj = service.find(id);
-
 		return ResponseEntity.ok().body(obj);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Telefone obj){
+	public ResponseEntity<Void> insert(@RequestBody Telefone obj) {
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-	return ResponseEntity.created(uri).build();
+		return ResponseEntity.created(uri).build();
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody Telefone obj, @PathVariable Integer id){
+	public ResponseEntity<Void> update(@RequestBody Telefone obj, @PathVariable Integer id) {
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();

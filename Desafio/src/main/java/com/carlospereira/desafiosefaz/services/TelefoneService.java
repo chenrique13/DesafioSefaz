@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.carlospereira.desafiosefaz.domain.Telefone;
 import com.carlospereira.desafiosefaz.repositories.TelefoneRepository;
+import com.carlospereira.desafiosefaz.services.exception.ObjectNotFoundException;
 
 @Service
 public class TelefoneService {
@@ -16,7 +17,8 @@ public class TelefoneService {
 
 	public Telefone find(Integer id) {
 		Optional<Telefone> obj = repositorio.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new 
+				ObjectNotFoundException("Telefone não encontrado! Id: " + id));
 	}
 	
 	public Telefone insert(Telefone obj) {
