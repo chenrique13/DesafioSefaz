@@ -1,6 +1,7 @@
 package com.carlospereira.desafiosefaz.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,12 @@ public class UsuarioResource {
 	@Autowired
 	private UsuarioService service;
 
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<Usuario>> findall() {
+		List <Usuario> list = service.findall();
+		return ResponseEntity.ok().body(list);
+	}
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Usuario> find(@PathVariable Integer id) {
 		Usuario obj = service.find(id);
@@ -39,6 +46,12 @@ public class UsuarioResource {
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Usuario> delete(@PathVariable Integer id) {
+	 service.delete(id);
+	 return ResponseEntity.noContent().build();
 	}
 
 }

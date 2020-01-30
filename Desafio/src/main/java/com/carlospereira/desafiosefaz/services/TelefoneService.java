@@ -30,4 +30,9 @@ public class TelefoneService {
 		find(obj.getId());
 		return repositorio.save(obj);
 	}
+	
+	public void delete(Integer id) {
+		find(id);
+		repositorio.deleteById(id);
+	}
 }
