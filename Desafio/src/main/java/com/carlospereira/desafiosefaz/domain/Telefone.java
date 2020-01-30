@@ -45,7 +45,7 @@ public class Telefone implements Serializable {
 		this.usuario = usuario;
 	}
 
-	// Gets e sets
+	// Getters e setters
 	public Integer getId() {
 		return id;
 	}
