@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.carlospereira.desafiosefaz.domain.NovoUsuario;
 import com.carlospereira.desafiosefaz.domain.Usuario;
 import com.carlospereira.desafiosefaz.services.UsuarioService;
 
@@ -24,10 +25,10 @@ public class UsuarioResource {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Usuario>> findall() {
-		List <Usuario> list = service.findall();
+		List<Usuario> list = service.findall();
 		return ResponseEntity.ok().body(list);
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Usuario> find(@PathVariable Integer id) {
 		Usuario obj = service.find(id);
@@ -35,7 +36,8 @@ public class UsuarioResource {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Usuario obj) {
+	public ResponseEntity<Void> insert(@RequestBody NovoUsuario objNovo) {
+		Usuario obj = service.fromUsuario(objNovo);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
@@ -47,11 +49,11 @@ public class UsuarioResource {
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Usuario> delete(@PathVariable Integer id) {
-	 service.delete(id);
-	 return ResponseEntity.noContent().build();
+		service.delete(id);
+		return ResponseEntity.noContent().build();
 	}
 
 }
