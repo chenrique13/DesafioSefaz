@@ -40,7 +40,7 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
-	// Gets e sets
+	// Getters e setters
 	public Integer getId() {
 		return id;
 	}

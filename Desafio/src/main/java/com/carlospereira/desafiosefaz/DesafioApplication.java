@@ -31,16 +31,11 @@ public class DesafioApplication implements CommandLineRunner {
 		Usuario usuario1 = new Usuario(null, "Carlos", "c.henrique1309@gmail.com", "1234");
 		Usuario usuario2 = new Usuario(null, "Henrique", "henrique@gmail.com", "1234");
 
-		//criando telefones
+		//criando telefones e associando o usuario
 		
 		Telefone telefone1 = new Telefone(null, 81, "85740926", "Celular", usuario1);
 		Telefone telefone2 = new Telefone(null, 81, "34430926", "Residencial", usuario1);
 		Telefone telefone3 = new Telefone(null, 81, "95562199", "Celular", usuario2);
-		
-		//associando telefones nos usuarios
-		
-		usuario1.getTelefones().addAll(Arrays.asList(telefone1,telefone2));
-		usuario2.getTelefones().addAll(Arrays.asList(telefone3));
 		
 		// Salvando usuarios e telefones no banco
 
