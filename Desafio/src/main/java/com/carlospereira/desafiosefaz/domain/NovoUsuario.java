@@ -2,11 +2,16 @@ package com.carlospereira.desafiosefaz.domain;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
 public class NovoUsuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@NotEmpty(message = "Preenchimento Obrigatório")
 	private String nome;
+	@NotEmpty(message = "Preenchimento Obrigatório")
 	private String email;
+	@NotEmpty(message = "Preenchimento Obrigatório")
 	private String senha;
 
 	private Integer ddd;

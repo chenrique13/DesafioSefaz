@@ -17,6 +17,8 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -33,6 +35,10 @@ public class Usuario implements Serializable {
 	@NotEmpty(message = "Preenchimento Obrigatório")
 	@Email(message = "E-mail inválido")
 	private String email;
+
+	@NotEmpty(message = "Preenchimento Obrigatório")
+	@Length(min = 5, max = 120, message = "O tamanho deve ser entre 5 e 120 caracteres")
+	@JsonIgnore
 	private String senha;
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL) // Associacao
