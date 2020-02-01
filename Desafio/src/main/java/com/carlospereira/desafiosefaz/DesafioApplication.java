@@ -32,6 +32,7 @@ public class DesafioApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		// criando usuarios
+		Usuario admin = new Usuario(null, "Admin", "administrador@hotmail.com", cod.encode("admin"));
 		Usuario usuario1 = new Usuario(null, "Carlos", "c.henrique1309@gmail.com", cod.encode("12345678"));
 		Usuario usuario2 = new Usuario(null, "Henrique", "henrique@gmail.com", cod.encode("12345678"));
 
@@ -43,8 +44,9 @@ public class DesafioApplication implements CommandLineRunner {
 
 		// Salvando usuarios e telefones no banco
 
-		usuarioRepository.saveAll(Arrays.asList(usuario1, usuario2));
+		usuarioRepository.saveAll(Arrays.asList(admin, usuario1, usuario2));
 		telefoneRepository.saveAll(Arrays.asList(telefone1, telefone2, telefone3));
+
 	}
 
 }
