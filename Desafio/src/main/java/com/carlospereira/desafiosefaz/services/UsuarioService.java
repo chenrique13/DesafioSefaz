@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.carlospereira.desafiosefaz.domain.NovoUsuario;
@@ -23,6 +24,9 @@ public class UsuarioService {
 
 	@Autowired
 	private TelefoneRepository telefoneRepositorio;
+
+	@Autowired
+	private BCryptPasswordEncoder cod;
 
 	public List<Usuario> findall() {
 		return usuarioRepositorio.findAll();
@@ -56,7 +60,7 @@ public class UsuarioService {
 	}
 
 	public Usuario fromUsuario(NovoUsuario novoObj) {
-		Usuario u1 = new Usuario(null, novoObj.getNome(), novoObj.getEmail(), novoObj.getSenha());
+		Usuario u1 = new Usuario(null, novoObj.getNome(), novoObj.getEmail(), cod.encode(novoObj.getSenha()));
 		Telefone t1 = new Telefone(null, novoObj.getDdd(), novoObj.getNumero(), novoObj.getTipo(), u1);
 
 		u1.getTelefones().add(t1);
@@ -65,9 +69,20 @@ public class UsuarioService {
 	}
 
 	private void updateData(Usuario novoObj, Usuario obj) {
-		novoObj.setNome(obj.getNome());
-		novoObj.setEmail(obj.getEmail());
-		novoObj.setSenha(obj.getSenha());
-		novoObj.setTelefones(obj.getTelefones());
+		if (obj.getNome() == null) {
+			novoObj.setNome(novoObj.getNome());
+		} else {
+			novoObj.setNome(obj.getNome());
+		}
+		if (obj.getEmail() == null) {
+			novoObj.setEmail(novoObj.getEmail());
+		} else {
+			novoObj.setEmail(obj.getEmail());
+		}
+		if (obj.getSenha() == null) {
+			novoObj.setSenha(novoObj.getSenha());
+		} else {
+			novoObj.setSenha(obj.getSenha());
+		}
 	}
 }
